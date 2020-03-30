@@ -15,7 +15,7 @@
     "@angular/animations": "^5.2.11",
     "@angular/common": "5.2.11",
     "@angular/compiler": "5.2.11",
-    "@angular/compiler-cli": "5.2.11",
+    "@angular/compiler-cli": "^9.1.0",
     "@angular/core": "5.2.11",
     "@angular/forms": "5.2.11",
     "@angular/http": "5.2.11",
@@ -30,7 +30,7 @@
     "@types/auth0-js": "^8.11.12",
     "auth0-js": "^9.13.0",
     "cordova-android": "^8.1.0",
-    "cordova-ios": "4.5.4",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-customurlscheme": "^4.3.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-inappbrowser": "^3.2.0",
@@ -48,7 +48,7 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.10",
+    "@ionic/app-scripts": "^3.2.4",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
