@@ -1,0 +1,21 @@
+<!-- Generated template for the PlayerComponent component -->
+<div>
+  <ion-toolbar color="primary" padding>
+    <ion-grid>
+      <ion-row align-items-center id="media-controls">
+        <button clear ion-col ion-button (click)="previous()">
+          <ion-icon color="light" name="skip-backward"> </ion-icon>
+        </button>
+        <button clear ion-col ion-button *ngIf="!state.playing" (click)="play()">
+          <ion-icon color="light" name="play"></ion-icon>
+        </button>
+        <button clear ion-col ion-button *ngIf="!!state.playing" (click)="pause()">
+          <ion-icon color="light" name="pause"></ion-icon>
+        </button>
+        <button clear ion-col ion-button (click)="next()">
+          <ion-icon color="light" name="skip-forward"></ion-icon>
+        </button>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</div>
