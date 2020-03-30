@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>audio-player</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="com.ilalife.enlighto" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>enlighto</name>
+    <description>An audio learning application.</description>
+    <author email="srjpn123@gmail.com" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -84,10 +84,10 @@
     <engine name="ios" spec="~4.5.4" />
     <allow-navigation href="http://192.168.0.14:8100" />
     <plugin name="cordova-plugin-customurlscheme" spec="^4.3.0">
-        <variable name="URL_SCHEME" value="io.ionic.starter" />
-        <variable name="ANDROID_SCHEME" value="io.ionic.starter" />
+        <variable name="URL_SCHEME" value="com.ilalife.enlighto" />
+        <variable name="ANDROID_SCHEME" value="com.ilalife.enlighto" />
         <variable name="ANDROID_HOST" value="bk-tmp.auth0.com" />
-        <variable name="ANDROID_PATHPREFIX" value="/cordova/io.ionic.starter/callback" />
+        <variable name="ANDROID_PATHPREFIX" value="/cordova/com.ilalife.enlighto/callback" />
     </plugin>
     <plugin name="cordova-plugin-safariviewcontroller" spec="^1.5.4" />
 </widget>

@@ -1,5 +1,5 @@
 {
-  "name": "audio-player",
+  "name": "enlighto",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
@@ -60,10 +60,10 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "io.ionic.starter",
-        "ANDROID_SCHEME": "io.ionic.starter",
+        "URL_SCHEME": "com.ilalife.enlighto",
+        "ANDROID_SCHEME": "com.ilalife.enlighto",
         "ANDROID_HOST": "enlighto.auth0.com",
-        "ANDROID_PATHPREFIX": "/cordova/io.ionic.starter/callback"
+        "ANDROID_PATHPREFIX": "/cordova/com.ilalife.enlighto/callback"
       },
       "cordova-plugin-safariviewcontroller": {},
       "cordova-plugin-inappbrowser": {}
