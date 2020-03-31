@@ -1,5 +1,12 @@
 <!-- Generated template for the PlayerComponent component -->
-<div>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-range min="0" color="light" [max]="state.durationSec" [formControl]="seekbar" (ionFocus)="onSeekStart()"
+      (ionBlur)="onSeekEnd($event)" name="seekbar">
+      <ion-label color="light" range-left>{{ state.time }}</ion-label>
+      <ion-label color="light" range-right>{{ state.duration }}</ion-label>
+    </ion-range>
+  </ion-toolbar>
   <ion-toolbar color="primary" padding>
     <ion-grid>
       <ion-row align-items-center id="media-controls">
@@ -18,4 +25,4 @@
       </ion-row>
     </ion-grid>
   </ion-toolbar>
-</div>
+</ion-footer>

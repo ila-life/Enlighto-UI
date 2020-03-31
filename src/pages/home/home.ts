@@ -2,9 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { NavController, NavParams, Navbar, Content, LoadingController } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import { CloudProvider } from '../../providers/cloud/cloud';
-import { pluck, filter, map, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'page-home',
@@ -34,8 +32,6 @@ export class HomePage {
   state: any = {};
   onSeekState: boolean;
   currentFile: any = {};
-  displayFooter: string = "inactive";
-  loggedIn: Boolean;
   @ViewChild(Navbar) navBar: Navbar;
   @ViewChild(Content) content: Content;
 
@@ -43,8 +39,7 @@ export class HomePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
-    public cloudProvider: CloudProvider,
-    private store: Store<any>
+    public cloudProvider: CloudProvider
   ) {
     this.getDocuments();
   }
@@ -63,34 +58,6 @@ export class HomePage {
     });
     loading.present();
     return loading;
-  }
-
-  ionViewWillLoad() {
-    this.store.select('appState').subscribe((value: any) => {
-      this.state = { ...this.state, ...value.media };
-    });
-
-    // Resize the Content Screen so that Ionic is aware of footer
-    this.store
-      .select('appState')
-      .pipe(pluck('media', 'canplay'), filter(value => value === true))
-      .subscribe(() => {
-        this.displayFooter = 'active';
-        this.content.resize();
-      });
-
-    // Updating the Seekbar based on currentTime
-    this.store
-      .select('appState')
-      .pipe(
-        pluck('media', 'timeSec'),
-        filter(value => value !== undefined),
-        map((value: any) => Number.parseInt(value)),
-        distinctUntilChanged()
-      )
-      .subscribe((value: any) => {
-        this.seekbar.setValue(value);
-      });
   }
 
   openFile(file, index) {

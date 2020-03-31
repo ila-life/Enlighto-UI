@@ -1,7 +1,10 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { AudioProvider } from '../../providers/audio/audio';
+import { FormControl } from '@angular/forms';
+import { Content } from 'ionic-angular';
 import { Store } from '@ngrx/store';
 import { CANPLAY, LOADEDMETADATA, PLAYING, TIMEUPDATE, LOADSTART, RESET } from '../../providers/store/store';
+import { pluck, filter, map, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'player',
@@ -10,6 +13,7 @@ import { CANPLAY, LOADEDMETADATA, PLAYING, TIMEUPDATE, LOADSTART, RESET } from '
 export class PlayerComponent {
   onSeekState: boolean;
   state: any = {};
+  @ViewChild(Content) content: Content;
 
   @Input()
   currentFile: any = {};
@@ -19,6 +23,7 @@ export class PlayerComponent {
 
   @Output()
   previousSong = new EventEmitter();
+  seekbar: FormControl = new FormControl("seekbar");
 
   constructor(
     public audioProvider: AudioProvider,
@@ -27,14 +32,24 @@ export class PlayerComponent {
 
   }
 
-  ionViewWillLoad() {
-    this.store.select('appState')
-      .subscribe((value: any) => {
-        this.state = value.media;
-      });
-  }
-
   ngOnInit() {
+    this.store.select('appState').subscribe((value: any) => {
+      this.state = { ...this.state, ...value.media };
+    });
+
+    // Updating the Seekbar based on currentTime
+    this.store
+      .select('appState')
+      .pipe(
+        pluck('media', 'timeSec'),
+        filter(value => value !== undefined),
+        map((value: any) => Number.parseInt(value)),
+        distinctUntilChanged()
+      )
+      .subscribe((value: any) => {
+        this.seekbar.setValue(value);
+      });
+
     this.playStream(this.currentFile.file.url);
   }
 
@@ -113,16 +128,10 @@ export class PlayerComponent {
 
   next() {
     this.nextSong.emit();
-    // let index = this.currentFile.index + 1;
-    // let file = this.files[index];
-    // this.openFile(file, index);
   }
 
   previous() {
     this.previousSong.emit()
-    // let index = this.currentFile.index - 1;
-    // let file = this.files[index];
-    // this.openFile(file, index);
   }
 
   onSeekStart() {
@@ -140,5 +149,4 @@ export class PlayerComponent {
       this.audioProvider.seekTo(event.value);
     }
   }
-
 }

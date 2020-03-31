@@ -29,15 +29,5 @@
 
 </ion-content>
 
-<ion-footer *ngIf="currentFile.file" [@showHide]="displayFooter">
-  <ion-toolbar color="primary">
-    <ion-range min="0" color="light" [max]="state.durationSec" [formControl]="seekbar" (ionFocus)="onSeekStart()"
-      (ionBlur)="onSeekEnd($event)" name="seekbar">
-      <ion-label color="light" range-left>{{ state.time }}</ion-label>
-      <ion-label color="light" range-right>{{ state.duration }}</ion-label>
-    </ion-range>
-  </ion-toolbar>
-
-  <player (nextSong)="next()" (previousSong)="previous()" [currentFile]="currentFile">
-  </player>
-</ion-footer>
+<player *ngIf="currentFile.file" (nextSong)="next()" (previousSong)="previous()" [currentFile]="currentFile">
+</player>
