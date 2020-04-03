@@ -62,7 +62,9 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-customurlscheme": {
         "URL_SCHEME": "com.ilalife.enlighto",
@@ -74,9 +76,9 @@
       "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
-      "android",
+      "browser",
       "ios",
-      "browser"
+      "android"
     ]
   }
 }
