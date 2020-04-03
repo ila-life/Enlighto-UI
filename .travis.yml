@@ -17,7 +17,7 @@ env:
   CXX=g++-4.8
 
 install:
-  - npm install -g gulp cordova ionic
+  - npm install -g cordova ionic
   - npm install
 
 before_script:
@@ -33,7 +33,7 @@ before_script:
   - export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/23.0.2
 
 script:
-  - cordova prepare
+  - ionic cordova prepare --no-build
 
   # build Android and iOS packages
   - cordova build android --release
