@@ -1,4 +1,4 @@
-sudo: false
+os: linux
 
 language: android
 
@@ -12,41 +12,23 @@ android:
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
+
 addons:
   apt:
     sources:
-    - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
-      key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
+      - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+        key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
     packages:
-    - oracle-java8-installer
-    - oracle-java8-set-default
-    - yarn
-    - jq
-licenses:
-- android-sdk-preview-license-.+
-- android-sdk-license-.+
-- google-gdk-license-.+
-
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -f  $HOME/.gradle/caches/transforms-1/transforms-1.lock
-  - rm -rf $HOME/.gradle/caches/3.5/fileHashes/
-  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
-
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/Library/Caches/Yarn/v1/
-    - $HOME/.cache/yarn/v1/
+      - oracle-java8-installer
+      - oracle-java8-set-default
 
 before_install:
   - export LANG=en_US.UTF-8
   - nvm install 10.15.2
-  - npm install -g ionic cordova
+  - npm install -g cordova ionic
+  - npm install
 
 script:
-  - npm install
   - ionic cordova build android --prod --release
   - mkdir -p output
   - cp platforms/android/build/outputs/apk/android-release-unsigned.apk output/ionictravis-release-unsigned.apk
