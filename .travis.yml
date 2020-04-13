@@ -34,5 +34,5 @@ before_script:
 
 script:
   - ls
-  - cordova platform add android --save
+  - cordova prepare
   - ionic cordova build android --release
