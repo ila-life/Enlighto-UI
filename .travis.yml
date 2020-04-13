@@ -2,7 +2,7 @@ sudo: false
 
 language: java
 jdk:
-    - oraclejdk8
+    - openjdk8
 node_js:
   - "10.15.2"
 
