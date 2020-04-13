@@ -29,7 +29,7 @@ before_install:
   - npm install
 
 script:
-  - ionic cordova build android --prod --release
+  - ionic cordova build android --release
   - mkdir -p output
   - cp platforms/android/build/outputs/apk/android-release-unsigned.apk output/ionictravis-release-unsigned.apk
 
