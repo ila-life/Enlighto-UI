@@ -65,12 +65,14 @@ export class HomePage {
   }
 
   next() {
+    if (this.isLastPlaying()) return;
     let index = this.currentFile.index + 1;
     let file = this.files[index];
     this.openFile(file, index);
   }
 
   previous() {
+    if (this.isFirstPlaying()) return;
     let index = this.currentFile.index - 1;
     let file = this.files[index];
     this.openFile(file, index);

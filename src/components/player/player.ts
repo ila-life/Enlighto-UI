@@ -106,6 +106,9 @@ export class PlayerComponent {
             }
           });
 
+        case 'ended':
+          return this.next()
+
         case 'loadstart':
           return this.store.dispatch({ type: LOADSTART, payload: { value: true } });
       }
