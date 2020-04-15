@@ -37,7 +37,8 @@ env:
   - secure: i66GMvyQl286ztvqgTZ5HkD0v45ljRJzNzrpyG7PFjpyarEkr8zTyM82gEUToWjzXpRS9feuvOwhDkz1mY2B+XFt0iH6sXPB/JvSt9bV5LRXkFRwv49k+njhFnA1aae7tBsxxuybUqftACeUBdAycSKPEjODNwM1GyQB/cCduF/VqMJRjxzhaPTJa/uUUiBC4ekrKYJCU4cAM2YMdXt1J70usilB+s51McCB6tVmzNdkSKx+p7PEt1F6Fet9phKRRDDDNgJD9L4AD4HlydJwN+o+2oDdTOpP0yGBshfERZi2n1EhGGCt4dxhA9LPuVBObDiZBzRmh1/AYMZrLg7gSuaG4UjHvUbiH+ElFC1H+alw1EjOe59X9PJe/fqskHExr935e11OXQiKLv4wd/7TOPmj4dPKL4gEBxcHujRmT7dybm62DY9HisW6STTPyAArUnwSbIUP+m/4x03ICx+7yipcyNb6epPw4iwp7VPi7jcJaxx88phczZarR1hFGxdXDw+wGAhqIdlX+a8CEeFBvnnQszx8kLE4CFgjao0yNVTRAVd4q/O1uXn2LPzBpccNG/PHT+EDYQypH8ZeZ/LR5VgbeK1h3NP4GX/4PWrTBT0UH7EeJvIh/SuzS5tvPiEeE3rNFTNqsxtu+Tb7jDJ9Jk1QXXTgfY15iCOTwLwwlpY=
 deploy:
   provider: releases
-  api_key: "<GITHUB_TOKEN>"
+  api_key:
+    secure: "<GITHUB_TOKEN>"
   file_glob: true
   file: output/*
   skip_cleanup: true
