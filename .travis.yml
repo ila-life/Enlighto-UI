@@ -23,6 +23,8 @@ addons:
     - oracle-java8-installer
     - oracle-java8-set-default
 before_install:
+- openssl aes-256-cbc -K $encrypted_bd6e7088737f_key -iv $encrypted_bd6e7088737f_iv
+  -in enlighto.jks.enc -out enlighto.jks -d
 - export LANG=en_US.UTF-8
 - nvm install 10.15.2
 - npm install -g cordova ionic
@@ -31,10 +33,15 @@ script:
 - npm test
 - ionic cordova build android --release
 - mkdir -p output
-- cp platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk output/ionictravis-release-unsigned.apk
+- jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg
+  SHA1 -keystore enlighto.jks platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+- zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+  output/ionictravis-release-unsigned.apk
 env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - secure: nQ35kb+K+Ua2CcFYWIn5oHc+BlX5BPHliRcihugQJI9L22S77EsMwQzm/2mACsYB6juhz18/eaO0k2lsLJMhHx8Psh3x8o66Pck9G2kJrsMk6ePBPl+ih31+b6wxr0jo4J8kycRWTQih+Sz28ABEVaBY4kCQhpTPutHFpwbOsG81yHLf81MjlV9tGAQZMQh0pg6+zaSPLnwEmgu16u5NoEn67U+VT6YkXvRIRf0dm09w0TFjr1aFx8vP+tWS9AMN/kwPfFX81Rtnh5uifh3q0R9Oq1rOF2rsYNPaDnMXFebeMOhMjAiaouvXXFdvfwbKEs7fF2WitAZQo/mV5KLJJBU1KK8l2tiIdxDeDACz2U6VTjYSHW2NwB2AqBp6SHxvAT5QjaJcMjN0pTKtBnWo6jP/WsCa7ofmtJIWayUxHiI7d9xZ94Xm1XkVNHJcnQfg0yfRb6B6tr2xLzG5vztEKBLTSSfw5nqM+sY0VI6HfR08EN3gMqayBP3rHpty15vWfl8IaxholEBC+bQlBIk5UsyamYr7YeeZU6O7TFOTfgGoFnMyhR4pvDeU8ETW4qhL8Y4wNc6o6nrxklM/KGGW1LEMCzvI3+1sS2GtXdq5a6sRdvFylxMVrXerriwLNdB3ZjDAdoPMe+ZX0EFQYkXvrde62NPW7+TTM18JHce7aTg=
+  - secure: Wwsq3LcQkQ4vdj4kltyFOVUrxlAjXKEsAXn0HV5XwjvgJMgaysS/XlIZU1Ta8d9idankHjKkDQfayz4ZlgpJ2fbLMID8/LNivXBZNv3SgJUMQMaj627z1R2OXPr/YxF/2iF9obeZBnO8p4hLXi0aqOWuW0tKfXasolLy6zoDVPANf72L6o7DnobDAuH+Fh/Nx8/esLoIqBMxGMnW62IIxyGDHqZLFp5lNyE3uzVrLfXJzbnTxgfJgmlGsQecqji2cLSyoThozxg/2UqZrHfijTUcKaVrHuygsi9xSF43OVkOypMGY0iluMb3J1OLwfHf2f0lhtXCm7i91rlDje7PzVWHNADuBt+V2ZlfsLJG9/QeEjgGKLIA3ydS8kcOTzvryrr1qV6NH3mgIcM6Kyj5G65kp2Em+UMXKJiE/jglm8Ycr6EzqKN9qb5GILR4jXYhxhyvkKQp8nG1tegCqB+XW/sVyFg91ZcmEOjUL1zBcPz6ntm14/Mza+9yFoVClVoJx/ksiuCmUWRR4CZ4R3E9A1NuT7WA0cFksbLw4WMkwjPOflLv02DIW/DaUNGC2rQVt07ZmQw832D7onaLkPH3Iz6hzuxydpf5KMUy6ZTrX3iMjAMLlBJJPeLPwu8aGhhqSEv4qVCwEzRvQ0M4N0rhiJXtM5NU3VTGLjnHdZVMkcI=
 deploy:
   provider: releases
   api_key:
