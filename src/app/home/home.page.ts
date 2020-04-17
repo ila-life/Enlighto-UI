@@ -28,11 +28,12 @@ export class HomePage {
   play(song) {
     this.currentSong = song ? song : this.currentSong;
     const previewUrl = this.currentSong.url;
-    if (!previewUrl)
+    if (!previewUrl) {
       return;
+    }
     this.nowPlaying = new Audio(previewUrl);
     this.nowPlaying.addEventListener('timeupdate', () => {
-      this.progress = (this.nowPlaying.currentTime / this.nowPlaying.duration)
+      this.progress = (this.nowPlaying.currentTime / this.nowPlaying.duration);
     });
     this.nowPlaying.play();
     this.nowPlaying.currentTime = this.pausedTime;
@@ -48,7 +49,7 @@ export class HomePage {
     this.playing = false;
   }
 
-  getCurrentSongIndex() { return this.songs.findIndex(x => x.url === this.currentSong.url) }
+  getCurrentSongIndex() { return this.songs.findIndex(x => x.url === this.currentSong.url); }
 
   isFirstPlaying() {
     return this.getCurrentSongIndex() === 0;
@@ -59,26 +60,28 @@ export class HomePage {
   }
 
   fastforward() {
-    this.nowPlaying.currentTime = this.nowPlaying.currentTime + 5
+    this.nowPlaying.currentTime = this.nowPlaying.currentTime + 5;
   }
 
   rewind() {
-    this.nowPlaying.currentTime = this.nowPlaying.currentTime - 5
+    this.nowPlaying.currentTime = this.nowPlaying.currentTime - 5;
   }
 
   next() {
-    if (this.isLastPlaying())
-      return
+    if (this.isLastPlaying()) {
+      return;
+    }
     const nextSong = this.songs[this.getCurrentSongIndex() + 1];
-    this.reset()
+    this.reset();
     this.play(nextSong);
   }
 
   previous() {
-    if (this.isFirstPlaying())
-      return
+    if (this.isFirstPlaying()) {
+      return;
+    }
     const previousSong = this.songs[this.getCurrentSongIndex() - 1];
-    this.reset()
+    this.reset();
     this.play(previousSong);
   }
 
