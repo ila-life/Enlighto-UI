@@ -1,0 +1,55 @@
+os: linux
+language: android
+android:
+  components:
+  - platform-tools
+  - tools
+  - build-tools-28.0.3
+  - android-28
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - extra
+  - add-on
+  licenses:
+  - android-sdk-preview-license-.+
+  - android-sdk-license-.+
+  - google-gdk-license-.+
+addons:
+  apt:
+    sources:
+    - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
+      key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
+    packages:
+    - oracle-java8-installer
+    - oracle-java8-set-default
+before_install:
+- openssl aes-256-cbc -K $encrypted_bd6e7088737f_key -iv $encrypted_bd6e7088737f_iv
+  -in enlighto.jks.enc -out enlighto.jks -d
+- export LANG=en_US.UTF-8
+- nvm install 10.15.2
+- npm install -g cordova ionic
+- npm install
+script:
+- npm test
+- ionic cordova build android --release
+- mkdir -p output
+- jarsigner -verbose -sigalg SHA1withRSA -storepass $storepass -keypass $keypass -digestalg
+  SHA1 -keystore enlighto.jks platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+  enlighto
+- "${ANDROID_HOME}/build-tools/28.0.3/zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+  output/ionictravis-release-unsigned.apk"
+env:
+  global:
+  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+deploy:
+  provider: releases
+  api_key:
+    secure: XmPnSeo4sWPq+rwm2zYuXGWU97Ppn4cFG8sDADPUJXnqAb4JL4am1lg+po/e/Clm4MYsNblc1xSsxC1X821aizLiUSrVybg70WZXaJA2dxayRCFkJwlTHFWtdRhI4xV79u2R7lKrj3O+1VWcTb8X3HmxtyQ85IWYCUkrRZM7Ra9UKPIpgArrZ6gpEzFZxUpco17W+I4c02IvEkm6Z0+/N3PbNtQb417Ca1uxUPLcob8w4nBcHxUhUWoG5f7XyUM31xLt2ovrsSuIfvJbwymbembxPZ8d2XbRv7p4Uc7HbroDis2mmLCQOEYfb1kRPZ7n7GbHkzCsnGmz7Af35079yyPumjss+f72p8EeqeNXsny1r2XxDYHCTUmaIa+ORaHQY68VlvDskqiHtRhG8kk4pb9oc/hg0wyhIfjogrhKWw+aI5fma4U8665bCzWZa1OakHOcFlP1hcKfQ/jsQR5SzllDSrIqRxpUjokr1yC/K6k2O9AQUykorORfbR5mDfJTW5q1WfkaLObTyiuWqQqdIoykmaLNsL7PAXTmU5JhmNuPX9Mo1eVQwPPc71x5tDB//x1I1K4IhJq36QQhxL7KBj4IF3RhmtqW+/MaR3egN3fABTEC4PYZnbhm14q6uIwDce4oYxqoeFPqbBK2heJFIjck+N/YhogVXg4iJbAFgXc=
+  file_glob: true
+  file: output/*
+  skip_cleanup: true
+  overwrite: true
+  on:
+    branch: master
+  draft: true

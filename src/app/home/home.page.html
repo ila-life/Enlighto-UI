@@ -1,142 +1,51 @@
 <ion-header>
-  <ion-toolbar text-center>
-    <ion-title slot="start">
-      <img src="assets/img/logo.png" alt="Platzi Logo" height="32px" />
+  <ion-toolbar color="primary">
+    <ion-title slot="start" size="large" class="ion-text-left" colour="dark">
+      Enlighto
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <h1>Artistas</h1>
-  <ion-slides [options]="slideOpts" *ngIf="artists.length">
-    <ion-slide *ngFor="let artist of artists">
-      <ion-avatar class="album-avatar" (click)="showSongs(artist)">
-        <img width="90px" [src]="artist.images[0].url" />
-        <span>{{ artist.name }}</span>
-      </ion-avatar>
-    </ion-slide>
-  </ion-slides>
-  <h1 *ngIf="newReleases.length">Lanzamientos</h1>
-  <ion-slides [options]="slideOpts" *ngIf="newReleases.length">
-    <ion-slide *ngFor="let album of newReleases">
-      <ion-avatar class="album-avatar square-avatar">
-        <img width="90px" [src]="album.images[0].url" />
-        <span>{{ album.name }}</span>
-      </ion-avatar>
-    </ion-slide>
-  </ion-slides>
-  <h1 *ngIf="!newReleases.length">
-    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
-  </h1>
-  <ion-slides [options]="slideOpts" *ngIf="!newReleases.length">
-    <ion-slide>
-      <ion-avatar class="album-avatar square-avatar">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-    </ion-slide>
-    <ion-slide>
-      <ion-avatar class="album-avatar square-avatar">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-    </ion-slide>
-    <ion-slide>
-      <ion-avatar class="album-avatar square-avatar">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-    </ion-slide>
-    <ion-slide>
-      <ion-avatar class="album-avatar square-avatar">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-    </ion-slide>
-  </ion-slides>
-  <h1 *ngIf="favorites.length">Favoritos</h1>
-  <ion-slides [options]="slideOpts" *ngIf="favorites.length">
-    <ion-slide *ngFor="let album of favorites">
-      <ion-avatar class="album-avatar square-avatar">
-        <img width="90px" [src]="album.images[0].url" />
-        <span>{{ album.name }}</span>
-      </ion-avatar>
-    </ion-slide>
-  </ion-slides>
-  <h1 *ngIf="!favorites.length">
-    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
-  </h1>
-  <ion-slides [options]="slideOpts" *ngIf="!favorites.length">
-    <ion-slide>
-      <ion-avatar class="album-avatar square-avatar">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-    </ion-slide>
-    <ion-slide>
-      <ion-avatar class="album-avatar square-avatar">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-    </ion-slide>
-    <ion-slide>
-      <ion-avatar class="album-avatar square-avatar">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-    </ion-slide>
-    <ion-slide>
-      <ion-avatar class="album-avatar square-avatar">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-avatar>
-    </ion-slide>
-  </ion-slides>
+  <ion-list *ngIf="songs.length">
+    <ng-container *ngFor="let song of songs; let i = index">
+      <ion-item text-wrap (click)="reset();play(song)">
+        <ion-icon color="primary" item-start name="musical-note"></ion-icon>{{ song.name }}
+        <ion-icon slot="end" name="play" *ngIf="currentSong.url === song.url"></ion-icon>
+      </ion-item>
+    </ng-container>
+  </ion-list>
 </ion-content>
 <ion-footer padding>
   <ion-grid>
     <ion-row>
       <ion-col class="ion-text-start time-marker">{{
-        parseTime(song.currentTime) || "0:00"
+        parseTime(nowPlaying.currentTime) || "00:00"
       }}</ion-col>
       <ion-col class="ion-text-end time-marker">{{
-        parseTime(song.duration) || "0:00"
+        parseTime(nowPlaying.duration) || "00:00"
       }}</ion-col>
     </ion-row>
   </ion-grid>
-  <ion-progress-bar [value]="newTime" color="success"></ion-progress-bar>
+  <ion-progress-bar [value]="progress" color="dark"></ion-progress-bar>
   <ion-grid>
     <ion-row>
-      <ion-col class="ion-text-center" size="1">
-        <ion-icon
-          (click)="markAsFavourite()"
-          name="heart-empty"
-          color="success"
-          *ngIf="!song.favourite"
-        ></ion-icon>
-        <ion-icon
-          (click)="markAsNonFavourite()"
-          name="heart"
-          color="success"
-          *ngIf="song.favourite"
-        ></ion-icon>
+      <ion-col class="ion-text-center" size="2">
+        <ion-icon name="skip-backward" color="dark" (click)="previous()"></ion-icon>
       </ion-col>
-      <ion-col class="ion-text-center song-title" size="8">
-        <h2>{{ this.currentSong.name }}</h2>
+      <ion-col class="ion-text-center" size="3">
+        <ion-icon name="rewind" color="dark" (click)="rewind()"></ion-icon>
       </ion-col>
-      <ion-col class="ion-text-end" size="3">
-        <ion-icon
-          name="play"
-          color="success"
-          (click)="play('')"
-          *ngIf="!playing"
-        >
+      <ion-col class="ion-text-center" size="2">
+        <ion-icon name="play" color="dark" (click)="play()" *ngIf="!playing">
         </ion-icon>
-        <ion-icon
-          name="pause"
-          color="success"
-          (click)="pause()"
-          *ngIf="playing"
-        >
+        <ion-icon name="pause" color="dark" (click)="pause()" *ngIf="playing">
         </ion-icon>
-        <ion-icon
-          name="square"
-          color="success"
-          *ngIf="song.currentTime > 0"
-          (click)="reset()"
-        >
-        </ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-center" size="3">
+        <ion-icon name="fastforward"  color="dark" (click)="fastforward()"></ion-icon>
+      </ion-col>
+      <ion-col class="ion-text-center" size="2">
+        <ion-icon name="skip-forward" color="dark" (click)="next()"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,5 +1,7 @@
 {
   "name": "platzi-music-preparation",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

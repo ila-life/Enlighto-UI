@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthenticateService {
   constructor(private storage: Storage) {}
@@ -13,13 +13,13 @@ export class AuthenticateService {
     return new Promise((accept, reject) => {
       this.storage.get(key).then(usuario => {
         if (usuario) {
-          if (usuario.password == btoa(encryptedPass)) {
+          if (usuario.password === btoa(encryptedPass)) {
             accept(usuario);
           } else {
-            reject("Contraseña incorrecta");
+            reject('Contraseña incorrecta');
           }
         } else {
-          reject("No existe un usuario con este email");
+          reject('No existe un usuario con este email');
         }
       });
     });
@@ -30,12 +30,12 @@ export class AuthenticateService {
       this.storage.get(value.email).then(usuario => {
         if (usuario) {
           console.log(usuario);
-          reject("El usuario ya existe");
+          reject('El usuario ya existe');
         } else {
           // Un poco 'Minimo' de seguridad
           value.password = btoa(value.password);
           this.storage.set(value.email, value).then(() => {
-            accept("El usuario se ha creado con éxito");
+            accept('El usuario se ha creado con éxito');
           });
         }
       });
