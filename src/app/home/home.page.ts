@@ -35,6 +35,9 @@ export class HomePage {
     this.nowPlaying.addEventListener('timeupdate', () => {
       this.progress = (this.nowPlaying.currentTime / this.nowPlaying.duration);
     });
+    this.nowPlaying.addEventListener('ended', () => {
+      this.next();
+    });
     this.nowPlaying.play();
     this.nowPlaying.currentTime = this.pausedTime;
     this.playing = true;
