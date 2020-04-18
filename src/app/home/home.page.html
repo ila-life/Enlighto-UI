@@ -6,14 +6,16 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-list *ngIf="categories.length">
-    <ng-container *ngFor="let category of categories; let i = index">
-      <ion-item text-wrap (click)="showSongs(category)">
-        <ion-icon color="primary" item-start name="musical-note"></ion-icon>{{ category}}
-        <!-- <ion-icon slot="end" name="play" *ngIf="currentSong.url === song.url"></ion-icon> -->
-      </ion-item>
-    </ng-container>
-  </ion-list>
+  <ion-grid text-center *ngIf="categories.length">
+    <ion-row>
+      <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let category of categories; let i = index"
+        (click)="showSongs(category)">
+        <ion-img [src]="'http://localhost:4200/svg/md-book.svg'" color="secondary"></ion-img>
+        <!-- <ion-icon color="primary" name="book" size="large"></ion-icon> -->
+        <ion-label>{{ category }}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 <ion-footer padding>
   <ion-grid>
@@ -42,7 +44,7 @@
         </ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="3">
-        <ion-icon name="fastforward"  color="secondary" (click)="fastforward()"></ion-icon>
+        <ion-icon name="fastforward" color="secondary" (click)="fastforward()"></ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="2">
         <ion-icon name="skip-forward" color="secondary" (click)="next()"></ion-icon>
