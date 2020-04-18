@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title slot="start" size="large" class="ion-text-left" colour="dark">
+    <ion-title slot="start" size="large" class="ion-text-left">
       Enlighto
     </ion-title>
   </ion-toolbar>
@@ -26,26 +26,26 @@
       }}</ion-col>
     </ion-row>
   </ion-grid>
-  <ion-progress-bar [value]="progress" color="dark"></ion-progress-bar>
+  <ion-progress-bar [value]="progress" color="secondary"></ion-progress-bar>
   <ion-grid>
     <ion-row>
       <ion-col class="ion-text-center" size="2">
-        <ion-icon name="skip-backward" color="dark" (click)="previous()"></ion-icon>
+        <ion-icon name="skip-backward" color="secondary" (click)="previous()"></ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="3">
-        <ion-icon name="rewind" color="dark" (click)="rewind()"></ion-icon>
+        <ion-icon name="rewind" color="secondary" (click)="rewind()"></ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="2">
-        <ion-icon name="play" color="dark" (click)="play(null)" *ngIf="!playing">
+        <ion-icon name="play" color="secondary" (click)="play(null)" *ngIf="!playing">
         </ion-icon>
-        <ion-icon name="pause" color="dark" (click)="pause()" *ngIf="playing">
+        <ion-icon name="pause" color="secondary" (click)="pause()" *ngIf="playing">
         </ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="3">
-        <ion-icon name="fastforward"  color="dark" (click)="fastforward()"></ion-icon>
+        <ion-icon name="fastforward"  color="secondary" (click)="fastforward()"></ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="2">
-        <ion-icon name="skip-forward" color="dark" (click)="next()"></ion-icon>
+        <ion-icon name="skip-forward" color="secondary" (click)="next()"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>
