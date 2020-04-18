@@ -7,7 +7,8 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: './tabs/tabs.module#TabsPageModule'
-  }
+  },
+  { path: 'songs-modal', loadChildren: './songs-modal/songs-modal.module#SongsModalPageModule' }
 ];
 
 @NgModule({

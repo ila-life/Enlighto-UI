@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">{{ title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="selectSong(null)"><ion-icon color="primary" item-start name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let song of songs; index as i" (click)="selectSong(song)">
+        <ion-icon color="primary" item-start name="musical-note"></ion-icon>
+      <ion-label>
+        <h2>{{ song.title }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

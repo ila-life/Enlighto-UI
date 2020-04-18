@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MusicService } from '../services/music.service';
 import { ModalController, LoadingController } from '@ionic/angular';
+import { SongsModalPage } from '../songs-modal/songs-modal.page';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -8,6 +10,7 @@ import { ModalController, LoadingController } from '@ionic/angular';
 })
 export class HomePage {
   onSeekState: boolean;
+  categories: any[] = [];
   songs: any[] = [];
   nowPlaying: any = {};
   progress = 0;
@@ -22,7 +25,7 @@ export class HomePage {
   ) { }
 
   async ionViewDidEnter() {
-    this.songs = await this.musicService.getList();
+    this.categories = await this.musicService.getCategories();
   }
 
   play(song) {
@@ -111,5 +114,32 @@ export class HomePage {
       }
       return minutes + ':' + seconds;
     }
+  }
+
+  async showSongs(category) {
+    const loading = await this.loadingController.create({
+      message: "Loading..."
+    });
+    await loading.present();
+    const songs = await this.musicService.getSongs(category);
+    const modal = await this.modalController.create({
+      component: SongsModalPage,
+      componentProps: {
+        songs: songs,
+        title: 'Category'
+      }
+    });
+    loading.dismiss();
+
+    modal.onDidDismiss().then(({ data: selectedSong }) => {
+      if (selectedSong) {
+        this.songs = songs;
+        this.reset();
+        this.currentSong = selectedSong;
+        this.play(selectedSong);
+      }
+    });
+
+    return await modal.present();
   }
 }

@@ -6,11 +6,11 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-list *ngIf="songs.length">
-    <ng-container *ngFor="let song of songs; let i = index">
-      <ion-item text-wrap (click)="reset();play(song)">
-        <ion-icon color="primary" item-start name="musical-note"></ion-icon>{{ song.name }}
-        <ion-icon slot="end" name="play" *ngIf="currentSong.url === song.url"></ion-icon>
+  <ion-list *ngIf="categories.length">
+    <ng-container *ngFor="let category of categories; let i = index">
+      <ion-item text-wrap (click)="showSongs(category)">
+        <ion-icon color="primary" item-start name="musical-note"></ion-icon>{{ category}}
+        <!-- <ion-icon slot="end" name="play" *ngIf="currentSong.url === song.url"></ion-icon> -->
       </ion-item>
     </ng-container>
   </ion-list>
