@@ -36,7 +36,7 @@
         <ion-icon name="rewind" color="dark" (click)="rewind()"></ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="2">
-        <ion-icon name="play" color="dark" (click)="play()" *ngIf="!playing">
+        <ion-icon name="play" color="dark" (click)="play(null)" *ngIf="!playing">
         </ion-icon>
         <ion-icon name="pause" color="dark" (click)="pause()" *ngIf="playing">
         </ion-icon>
