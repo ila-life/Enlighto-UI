@@ -11,7 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
-import { SongsModalPageModule } from "./songs-modal/songs-modal.module";
+import { SongsModalPageModule } from './songs-modal/songs-modal.module';
 
 @NgModule({
   declarations: [AppComponent],

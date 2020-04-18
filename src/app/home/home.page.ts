@@ -118,14 +118,14 @@ export class HomePage {
 
   async showSongs(category) {
     const loading = await this.loadingController.create({
-      message: "Loading..."
+      message: 'Loading...'
     });
     await loading.present();
     const songs = await this.musicService.getSongs(category);
     const modal = await this.modalController.create({
       component: SongsModalPage,
       componentProps: {
-        songs: songs,
+        songs,
         title: 'Category'
       }
     });
