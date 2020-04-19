@@ -10,9 +10,9 @@
     <ion-row>
       <ion-col text-center sizeLg="3" sizeMd="3" sizeXs="4" *ngFor="let category of categories; let i = index"
         (click)="showSongs(category.title)">
-        <ion-card >
+        <ion-card>
           <ion-img [src]="category.imageUrl || 'assets/icon/md-book.svg'"></ion-img>
-          <ion-label color="dark">{{ category.title }}</ion-label>
+          <ion-label>{{ category.title }}</ion-label>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -29,26 +29,26 @@
       }}</ion-col>
     </ion-row>
   </ion-grid>
-  <ion-progress-bar [value]="progress" color="dark"></ion-progress-bar>
+  <ion-progress-bar [value]="progress"></ion-progress-bar>
   <ion-grid>
     <ion-row>
       <ion-col class="ion-text-center" size="2">
-        <ion-icon name="skip-backward" color="dark" (click)="previous()"></ion-icon>
+        <ion-icon name="skip-backward" (click)="previous()"></ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="3">
-        <ion-icon name="rewind" color="dark" (click)="rewind()"></ion-icon>
+        <ion-icon name="rewind" (click)="rewind()"></ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="2">
-        <ion-icon name="play" color="dark" (click)="play(null)" *ngIf="!playing">
+        <ion-icon name="play" (click)="play(null)" *ngIf="!playing">
         </ion-icon>
-        <ion-icon name="pause" color="dark" (click)="pause()" *ngIf="playing">
+        <ion-icon name="pause" (click)="pause()" *ngIf="playing">
         </ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="3">
-        <ion-icon name="fastforward" color="dark" (click)="fastforward()"></ion-icon>
+        <ion-icon name="fastforward" (click)="fastforward()"></ion-icon>
       </ion-col>
       <ion-col class="ion-text-center" size="2">
-        <ion-icon name="skip-forward" color="dark" (click)="next()"></ion-icon>
+        <ion-icon name="skip-forward" (click)="next()"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>
