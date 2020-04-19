@@ -10,8 +10,10 @@
     <ion-row>
       <ion-col text-center sizeLg="3" sizeMd="3" sizeXs="4" *ngFor="let category of categories; let i = index"
         (click)="showSongs(category.title)">
-        <ion-img [src]="category.imageUrl || 'assets/icon/md-book.svg'" style="border-radius: 3rem"></ion-img>
-        <ion-label color="light">{{ category.title }}</ion-label>
+        <ion-card >
+          <ion-img [src]="category.imageUrl || 'assets/icon/md-book.svg'"></ion-img>
+          <ion-label color="dark">{{ category.title }}</ion-label>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
