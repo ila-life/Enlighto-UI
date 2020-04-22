@@ -21,7 +21,7 @@ export class AuthenticateService {
 
   registerUser(credentials) {
     return firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
-      .then(res => res.user)
+      .then(res => res.user.updateProfile({ displayName: credentials.firstname }).then(x => res.user))
       .catch(err => { console.error(err) });
   }
 }
