@@ -26,16 +26,12 @@
       </ion-row>
     </ion-grid>
   </div> -->
-  <!-- <ion-list>
-    <ion-item onclick="window.open('https\:\/\/play.google.com/store/apps/details?id=com.ilalife.enlighto', '_system', 'location=yes'); return false;"> Rate App 
-      <ion-icon color="primary" item-start name="star" ></ion-icon>
-      <ion-icon color="primary" item-start name="star-half" ></ion-icon>
-      <ion-icon color="primary" item-start name="star-outline" ></ion-icon>
+  <ion-list lines='none' padding>
+    <ion-item (click)="share()"> Share this App
     </ion-item>
-  </ion-list> -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button onclick="window.open('https\:\/\/play.google.com/store/apps/details?id=com.ilalife.enlighto', '_system', 'location=yes'); return false;">
-      <ion-icon name="star-half"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-item
+      onclick="window.open('https\:\/\/play.google.com/store/apps/details?id=com.ilalife.enlighto', '_system', 'location=yes'); return false;">
+      Rate Us
+    </ion-item>
+  </ion-list>
 </ion-content>
