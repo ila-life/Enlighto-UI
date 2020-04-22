@@ -9,9 +9,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
-import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
 import { SongsModalPageModule } from './songs-modal/songs-modal.module';
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,9 +23,8 @@ import { SongsModalPageModule } from './songs-modal/songs-modal.module';
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     SongsModalPageModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.mapsApiKey
-    })
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireAuthModule
   ],
   providers: [
     StatusBar,

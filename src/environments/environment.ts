@@ -4,7 +4,12 @@
 
 export const environment = {
   production: false,
-  mapsApiKey: 'AIzaSyC4oqAm-faNI6Y3vkNJioDXwOtAwWn3g4I'
+  firebaseConfig: {
+    apiKey: "AIzaSyB7wniXozEQhtMu5teDtGcLtDVJAWp8bF0",
+    authDomain: "cosmic-backbone-272713.firebaseapp.com",
+    projectId: "cosmic-backbone-272713",
+    appId: "1:1078224727213:web:a20526bc7fcde349e76a24"
+  }
 };
 
 /*

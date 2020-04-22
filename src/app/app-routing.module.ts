@@ -5,6 +5,14 @@ const routes: Routes = [
   { path: '', redirectTo: 'tabs/home', pathMatch: 'full' },
   { path: 'intro', loadChildren: './intro/intro.module#IntroPageModule' },
   {
+    path: "login",
+    loadChildren: "./login/login.module#LoginPageModule",
+  },
+  {
+    path: "register",
+    loadChildren: "./register/register.module#RegisterPageModule"
+  },
+  {
     path: 'tabs',
     loadChildren: './tabs/tabs.module#TabsPageModule'
   },
@@ -17,4 +25,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
