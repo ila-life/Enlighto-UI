@@ -27,9 +27,8 @@
     </ion-grid>
   </div> -->
   <ion-list lines='none' padding>
-    <ion-item 
-    onclick="window.open('http:\/\/enlighto.tk/privacy_policy.html', '_system'); return false;">
-    Privacy Policy
+    <ion-item onclick="window.open('http:\/\/enlighto.tk/privacy_policy.html', '_system'); return false;">
+      Privacy Policy
     </ion-item>
     <ion-item (click)="share()"> Share this App
     </ion-item>
@@ -38,4 +37,9 @@
       Rate Us
     </ion-item>
   </ion-list>
+  <ion-footer text-center padding>
+    <img text-center src="/assets/img/logo.png" alt="Logo" width="50"/>
+    <ion-title>{{ appName }}</ion-title>
+    <ion-label>{{ versionNumber }}</ion-label>
+  </ion-footer>
 </ion-content>

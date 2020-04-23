@@ -6,6 +6,7 @@
     "private": true,
     "scripts": {
         "ng": "ng",
+        "debug:android": "ionic cordova run android -l -c -s --debug",
         "start": "ng serve",
         "prebuild": "$(npm bin)/cordova-update-config --appversion $(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]')",
         "build": "ng build",
@@ -27,6 +28,7 @@
         "@capacitor/cli": "1.1.1",
         "@capacitor/core": "1.1.1",
         "@capacitor/ios": "^1.1.1",
+        "@ionic-native/app-version": "^5.24.0",
         "@ionic-native/core": "^5.0.0",
         "@ionic-native/social-sharing": "^5.24.0",
         "@ionic-native/splash-screen": "^5.0.0",
@@ -37,6 +39,7 @@
         "connect": "^3.7.0",
         "cordova-android": "8.1.0",
         "cordova-browser": "6.0.0",
+        "cordova-plugin-app-version": "^0.1.9",
         "core-js": "^2.5.4",
         "rxjs": "~6.5.1",
         "serve-static": "^1.14.1",
@@ -97,7 +100,8 @@
             },
             "cordova-plugin-safariviewcontroller": {},
             "cordova-plugin-inappbrowser": {},
-            "cordova-plugin-x-socialsharing": {}
+            "cordova-plugin-x-socialsharing": {},
+            "cordova-plugin-app-version": {}
         },
         "platforms": [
             "android",
