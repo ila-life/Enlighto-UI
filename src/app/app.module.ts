@@ -11,8 +11,6 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
-import { AgmCoreModule } from '@agm/core';
-import { environment } from 'src/environments/environment';
 import { SongsModalPageModule } from './songs-modal/songs-modal.module';
 
 @NgModule({
@@ -23,10 +21,7 @@ import { SongsModalPageModule } from './songs-modal/songs-modal.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
-    SongsModalPageModule,
-    AgmCoreModule.forRoot({
-      apiKey: environment.mapsApiKey
-    })
+    SongsModalPageModule
   ],
   providers: [
     StatusBar,
