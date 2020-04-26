@@ -48,13 +48,13 @@ export class HomePage {
       const message = JSON.parse(action).message;
       switch (message) {
         case 'music-controls-next':
-          this.next()
+          this.next();
           break;
         case 'music-controls-previous':
-          this.previous()
+          this.previous();
           break;
         case 'music-controls-pause':
-          this.pause()
+          this.pause();
           break;
         case 'music-controls-play':
           this.play(null);
@@ -80,10 +80,10 @@ export class HomePage {
       return;
     }
     this.nowPlaying = new Audio(previewUrl);
-    this.musicControlInit()
+    this.musicControlInit();
     this.nowPlaying.addEventListener('timeupdate', () => {
       this.progress = (this.nowPlaying.currentTime / this.nowPlaying.duration);
-      this.musicControls.updateElapsed({ elapsed: this.progress, isPlaying: this.playing })
+      this.musicControls.updateElapsed({ elapsed: this.progress, isPlaying: this.playing });
     });
     this.nowPlaying.addEventListener('ended', () => {
       this.next();
