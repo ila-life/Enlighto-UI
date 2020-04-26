@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MusicControls } from '@ionic-native/music-controls/ngx';
+
 import { MusicService } from '../services/music.service';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { SongsModalPage } from '../songs-modal/songs-modal.page';
@@ -21,8 +23,51 @@ export class HomePage {
   constructor(
     private musicService: MusicService,
     public modalController: ModalController,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private musicControls: MusicControls
   ) { }
+
+  musicControlInit() {
+    this.musicControls.create({
+      track: this.currentSong.title,
+      artist: this.currentSong.artist,
+      isPlaying: this.nowPlaying.isPlaying,
+
+      duration: this.nowPlaying.duration,
+      elapsed: 0,
+      ticker: this.currentSong.title,
+
+      playIcon: 'play',
+      pauseIcon: 'pause',
+      prevIcon: 'skip-backward',
+      nextIcon: 'skip-forward',
+      notificationIcon: 'notification'
+    });
+
+    this.musicControls.subscribe().subscribe(action => {
+      const message = JSON.parse(action).message;
+      switch (message) {
+        case 'music-controls-next':
+          this.next()
+          break;
+        case 'music-controls-previous':
+          this.previous()
+          break;
+        case 'music-controls-pause':
+          this.pause()
+          break;
+        case 'music-controls-play':
+          this.play(null);
+          break;
+        default:
+          break;
+      }
+    });
+
+    this.musicControls.listen(); // activates the observable above
+
+    this.musicControls.updateIsPlaying(true);
+  }
 
   async ionViewDidEnter() {
     this.categories = await this.musicService.getCategories();
@@ -35,15 +80,17 @@ export class HomePage {
       return;
     }
     this.nowPlaying = new Audio(previewUrl);
+    this.musicControlInit()
     this.nowPlaying.addEventListener('timeupdate', () => {
       this.progress = (this.nowPlaying.currentTime / this.nowPlaying.duration);
+      this.musicControls.updateElapsed({ elapsed: this.progress, isPlaying: this.playing })
     });
     this.nowPlaying.addEventListener('ended', () => {
       this.next();
     });
     this.nowPlaying.play();
     this.nowPlaying.currentTime = this.pausedTime;
-    this.playing = true;
+    this.updateIsPlaying(true);
   }
 
   pause() {
@@ -52,7 +99,7 @@ export class HomePage {
     }
 
     this.pausedTime = this.nowPlaying.currentTime;
-    this.playing = false;
+    this.updateIsPlaying(false);
   }
 
   getCurrentSongIndex() { return this.songs.findIndex(x => x.url === this.currentSong.url); }
@@ -97,7 +144,12 @@ export class HomePage {
     }
     this.currentSong = {};
     this.progress = this.pausedTime = this.nowPlaying.currentTime = 0;
-    this.playing = false;
+    this.updateIsPlaying(false);
+  }
+
+  updateIsPlaying(isPlaying) {
+    this.playing = isPlaying;
+    this.musicControls.updateIsPlaying(isPlaying);
   }
 
   parseTime(time = '0.00') {

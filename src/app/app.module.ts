@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { MusicControls } from '@ionic-native/music-controls/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +28,7 @@ import { SongsModalPageModule } from './songs-modal/songs-modal.module';
     StatusBar,
     SplashScreen,
     SocialSharing,
+    MusicControls,
     AppVersion,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
